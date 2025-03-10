@@ -1,5 +1,5 @@
 const input = process.argv.slice(2); // creates an array with the args
-const inputStr = input[0];
+const inputStr = input[0] || ""; // the || prevents error due to undefined
 const obfuscate = (word) => {
   const lettersToChange = {
     a: "4",
@@ -7,10 +7,11 @@ const obfuscate = (word) => {
     o: "0",
     l: "1",
   }
-  let obfuscated = ""
-  for(const char of word) {
-    obfuscated += lettersToChange[char] || char;
-  }
-  return obfuscated;
+  return word
+  .split('') // creates an array of each individual letters
+  .map((char) => lettersToChange[char] || char) // returns a new array w/ change
+  .join(''); // joins the array back into a string
+
 };
+
 console.log(obfuscate(inputStr));
