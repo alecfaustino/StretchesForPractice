@@ -31,6 +31,70 @@ const data = {
   },
 };
 
+// print a list of everyone, who they follow, and who follows them. 
+const printAll = (data) => {
+  let printList = {}
+
+  for (const id in data) {
+    for (const ids of data[id].follows) {
+      let personName = data[id].name;
+      printList[personName] = {}
+      // currently returning undefined
+      console.log(printList);
+      // printList[data[id]]["name"] = {
+      //   follows: data[ids].name,
+      // }
+    }
+  }
+
+  return printList;
+
+};
+
+console.log(printAll(data));
+
+// return a list of names of people who follow someone who doesn't follow back
+const unrequitedFollowers = () => {
+  
+};
+
+// return name of person who has most followers && over 30
+const mostPopularOverAge30 = () => {
+  
+};
+
+// return name of person who follows the most people && over 30 
+const biggestFollowerOverAge30 = () => {
+  
+};
+
+// print a list of everyone and the sum # of their followers & followers of followers.
+const printAllReach = () => {
+  
+};
+
+
+// return name of the person who follows the most people
+const biggestFollower = (data) => {
+  // map for current name of the person who follows the most and how much following
+  let mostFollowing = {
+    name: "",
+    following: 0,
+  };
+  
+  for (const profile in data) {
+    const accessFollowsProp = data[profile].follows;
+    const accessNameProp = data[profile].name;
+    // Update map if we find someone with greater follows array
+    if(accessFollowsProp.length > mostFollowing.following) {
+      mostFollowing.name = accessNameProp;
+      mostFollowing.following = accessFollowsProp.length;
+    }
+  }
+  
+  return mostFollowing.name;
+};
+
 // return name of the person who is followed by the most people
 const mostPopular = (data) => {
   // going to create a map of each profile (f01, f02.. etc) as key and a value that holds # of times it appears in a follows array
@@ -64,54 +128,3 @@ const mostPopular = (data) => {
 
   return nameString;
 };
-
-console.log(mostPopular(data));
-
-// print a list of everyone, who they follow, and who follows them. 
-const printAll = () => {
-  
-};
-
-// return a list of names of people who follow someone who doesn't follow back
-const unrequitedFollowers = () => {
-  
-};
-
-// return name of person who has most followers && over 30
-const mostPopularOverAge30 = () => {
-  
-};
-
-// return name of person who follows the most people && over 30 
-const biggestFollowerOverAge30 = () => {
-  
-};
-
-// print a list of everyone and the sum # of their followers & followers of followers.
-const printAllReach = () => {
-  
-};
-
-
-// return name of the person who follows the most people
-const biggestFollower = (data) => {
-  // map for current name of the person who follows the most and how much following
-  let mostFollowing = {
-    name: "",
-    following: 0,
-  };
-
-  for (const profile in data) {
-    const accessFollowsProp = data[profile].follows;
-    const accessNameProp = data[profile].name;
-    // Update map if we find someone with greater follows array
-    if(accessFollowsProp.length > mostFollowing.following) {
-      mostFollowing.name = accessNameProp;
-      mostFollowing.following = accessFollowsProp.length;
-    }
-  }
-
-  return mostFollowing.name;
-};
-
-// console.log(biggestFollower(data));
