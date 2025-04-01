@@ -34,10 +34,23 @@ const data = {
 
 
 // return a list of names of people who follow someone who doesn't follow back
-const unrequitedFollowers = () => {
+const unrequitedFollowers = (data) => {
+  // using a set so that names are not duplicated
+  const unrequitedList = new Set();
+
+  for (const id in data) {
+    const followList = data[id].follows;
+    for (const follower of followList) {
+      if(!data[follower].follows.includes(id)) {
+        unrequitedList.add(data[id].name);
+      }
+    }
+  }
   
+  return Array.from(unrequitedList);
 };
 
+console.log(unrequitedFollowers(data));
 // return name of person who has most followers && over 30
 const mostPopularOverAge30 = () => {
   
@@ -136,4 +149,4 @@ const printAll = (data) => {
   return printList;
   
 };
-console.log(printAll(data));
+// console.log(printAll(data));
