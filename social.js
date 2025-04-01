@@ -32,30 +32,6 @@ const data = {
 };
 
 
-
-// return a list of names of people who follow someone who doesn't follow back
-const unrequitedFollowers = (data) => {
-  // using a set so that names are not duplicated
-  const unrequitedList = new Set();
-
-  for (const id in data) {
-    const followList = data[id].follows;
-    for (const follower of followList) {
-      if(!data[follower].follows.includes(id)) {
-        unrequitedList.add(data[id].name);
-      }
-    }
-  }
-  
-  return Array.from(unrequitedList);
-};
-
-console.log(unrequitedFollowers(data));
-// return name of person who has most followers && over 30
-const mostPopularOverAge30 = () => {
-  
-};
-
 // return name of person who follows the most people && over 30 
 const biggestFollowerOverAge30 = () => {
   
@@ -149,4 +125,51 @@ const printAll = (data) => {
   return printList;
   
 };
-// console.log(printAll(data));
+
+// return a list of names of people who follow someone who doesn't follow back
+const unrequitedFollowers = (data) => {
+  // using a set so that names are not duplicated
+  const unrequitedList = new Set();
+  
+  for (const id in data) {
+    const followList = data[id].follows;
+    for (const follower of followList) {
+      if(!data[follower].follows.includes(id)) {
+        unrequitedList.add(data[id].name);
+      }
+    }
+  }
+  
+  return Array.from(unrequitedList);
+};
+
+// return name of person who has most followers && over 30
+const mostPopularOverAge30 = (data) => {
+  const popularityMap = {};
+  for (const id in data) {
+    if(data[id].age > 30) {
+      popularityMap[id] = 0;
+    // {id: 0}
+    }
+  }
+  for (const id in data) {
+    const accessFollowsArray = data[id].follows;
+    for (const follower of accessFollowsArray) {
+
+      if(popularityMap[follower] !== undefined) {
+        popularityMap[follower]++;
+      }
+    }
+  }
+  
+  let highestCount = -1;
+  let mostPopularName = "";
+  for(const person in popularityMap) {
+    if(popularityMap[person] > highestCount) {
+      mostPopularName = data[person].name;
+      highestCount = popularityMap[person];
+    }
+  }
+  return mostPopularName;
+  
+};
