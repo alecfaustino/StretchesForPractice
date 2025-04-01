@@ -1,33 +1,35 @@
 // random scratch pad document for any random testing
 
+// practicing using GPT created questions
+
 // -------- practicing Callbacks. --------- //
 
-const fetchProductDetails = function(productId, callback, errorCallback) {
-  setTimeout(() => {
-    if(productId > 0) {
-      callback(productId);
-      return;
-    } else {
-      errorCallback(productId);
-      return;
-    }
-  }, 2000);
-};
+// const fetchProductDetails = function(productId, callback, errorCallback) {
+//   setTimeout(() => {
+//     if(productId > 0) {
+//       callback(productId); // mistake here, should've been a whole object
+//       return;
+//     } else {
+//       errorCallback(productId); // mistake here, should've been the error message
+//       return;
+//     }
+//   }, 2000);
+// };
 
-const successCallBack = function(productId) {
-  console.log("Product details received: ", {
-    productId,
-    name: "Smartphone",
-    price: 799.99,
-  });
-};
+// const successCallBack = function(productId) {
+//   console.log("Product details received: ", {
+//     productId,
+//     name: "Smartphone",
+//     price: 799.99,
+//   }); // this object should've been in the function definition and this should've only been a console log
+// };
 
-const errorCallback = function(productId) {
-  console.log(`Invalid product ID (${productId}). Please provide a positive productId`);
-};
+// const errorCallback = function(productId) {
+//   console.log(`Invalid product ID (${productId}). Please provide a positive productId`); // this message should've been in the functoin definition
+// };
 
-fetchProductDetails(50, successCallBack, errorCallback);
-fetchProductDetails(-1, successCallBack, errorCallback);
+// fetchProductDetails(50, successCallBack, errorCallback);
+// fetchProductDetails(-1, successCallBack, errorCallback);
 
 
 

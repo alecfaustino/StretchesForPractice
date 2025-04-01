@@ -31,27 +31,7 @@ const data = {
   },
 };
 
-// print a list of everyone, who they follow, and who follows them. 
-const printAll = (data) => {
-  let printList = {}
 
-  for (const id in data) {
-    for (const ids of data[id].follows) {
-      let personName = data[id].name;
-      printList[personName] = {}
-      // currently returning undefined
-      console.log(printList);
-      // printList[data[id]]["name"] = {
-      //   follows: data[ids].name,
-      // }
-    }
-  }
-
-  return printList;
-
-};
-
-console.log(printAll(data));
 
 // return a list of names of people who follow someone who doesn't follow back
 const unrequitedFollowers = () => {
@@ -110,7 +90,7 @@ const mostPopular = (data) => {
       }
     });
   }
-
+  
   let mostFollowers = 0;
   let nameString = ""
   for (const id in mostPopularMap) {
@@ -125,6 +105,35 @@ const mostPopular = (data) => {
       nameString += `${data[id].name} `;
     }
   }
-
+  
   return nameString;
 };
+
+
+// print a list of everyone, who they follow, and who follows them. 
+const printAll = (data) => {
+  let printList = {}
+  
+  // initialize all the objects first 
+  for (const id in data) {
+    let personName = data[id].name;
+    printList[personName] = {
+      follows: [],
+      followers: [],
+    };
+  }
+  // now we can push into both followers and follows without any being undefined
+  for (const id in data) {
+    let personName = data[id].name;
+    for (const ids of data[id].follows) {
+      let oppositeName = data[ids].name;
+      printList[personName].follows.push(data[ids].name);
+      printList[oppositeName].followers.push(personName);
+    }
+  }
+  
+  
+  return printList;
+  
+};
+console.log(printAll(data));
