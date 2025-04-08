@@ -32,21 +32,7 @@ const data = {
 };
 
 
-// return name of person who follows the most people && over 30 
-const biggestFollowerOverAge30 = (data) => {
-  let biggestFollower = null;
-  let howManyFollowing = 0;
-  for (const id in data) {
-    if (data[id].age > 30 && data[id].follows.length > howManyFollowing) {
-      biggestFollower = data[id].name;
-      howManyFollowing = data[id].follows.length;
-    }
-  }
-  
-  return biggestFollower;
-};
 
-console.log(biggestFollowerOverAge30(data));
 
 // print a list of everyone and the sum # of their followers & followers of followers.
 const printAllReach = () => {
@@ -160,13 +146,13 @@ const mostPopularOverAge30 = (data) => {
   for (const id in data) {
     if(data[id].age > 30) {
       popularityMap[id] = 0;
-    // {id: 0}
+      // {id: 0}
     }
   }
   for (const id in data) {
     const accessFollowsArray = data[id].follows;
     for (const follower of accessFollowsArray) {
-
+      
       if(popularityMap[follower] !== undefined) {
         popularityMap[follower]++;
       }
@@ -183,4 +169,17 @@ const mostPopularOverAge30 = (data) => {
   }
   return mostPopularName;
   
+  // return name of person who follows the most people && over 30 
+  const biggestFollowerOverAge30 = (data) => {
+    let biggestFollower = null;
+    let howManyFollowing = 0;
+    for (const id in data) {
+      if (data[id].age > 30 && data[id].follows.length > howManyFollowing) {
+        biggestFollower = data[id].name;
+        howManyFollowing = data[id].follows.length;
+      }
+    }
+    
+    return biggestFollower;
+  };
 };
